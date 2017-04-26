@@ -16,7 +16,10 @@ public class ArrayStack<T> implements Stack<T> {
 
     @Override
     public T pop() {
-        return (T) store[--N];
+        Object result = store[--N];
+        store[N] = null;
+
+        return (T) result;
     }
 
     @Override
