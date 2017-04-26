@@ -1,5 +1,7 @@
 package org.algorithms.data;
 
+import java.util.Iterator;
+
 /**
  * Created by vital on 26/04/2017.
  */
@@ -38,5 +40,24 @@ public class LinkedStack<T> implements Stack<T> {
     @Override
     public int size() {
         return N;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private Node node = first;
+
+            @Override
+            public boolean hasNext() {
+                return node == null;
+            }
+
+            @Override
+            public T next() {
+                T result = node.item;
+                node = node.next;
+                return result;
+            }
+        };
     }
 }

@@ -6,11 +6,10 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
-public class LinkedStackTest {
-
+public class ArrayStackTest {
     @Test
     public void simple() {
-        LinkedStack<Integer> stack = new LinkedStack<>();
+        ResizingArrayStack<Integer> stack = new ResizingArrayStack<Integer>();
         assertTrue(stack.isEmpty());
         stack.push(1);
         stack.push(2);
@@ -20,15 +19,11 @@ public class LinkedStackTest {
         assertEquals(2, (int) stack.pop());
         assertEquals(1, (int) stack.pop());
         assertEquals(0, stack.size());
-        assertTrue(stack.isEmpty());
-        stack.push(1);
-        assertEquals(1, stack.size());
-        assertEquals(1, (int) stack.pop());
     }
 
     @Test
     public void iterator() {
-        LinkedStack<Integer> stack = new LinkedStack<>();
+        ResizingArrayStack<Integer> stack = new ResizingArrayStack<Integer>();
         for(int i = 0; i < 10; i++) {
             stack.push(i);
         }
