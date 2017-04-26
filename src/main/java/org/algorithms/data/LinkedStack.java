@@ -5,39 +5,34 @@ package org.algorithms.data;
  */
 public class LinkedStack<T> implements Stack<T> {
     private int N = 0;
-    private Node last = null;
+    private Node first = null;
     private class Node {
         T item;
-        Node prev = null;
+        Node next = null;
 
-        Node(T item, Node prev) {
+        Node(T item, Node next) {
             this.item = item;
-            this.prev = prev;
+            this.next = next;
         }
     }
 
     @Override
     public void push(T item) {
-        if (last == null) {
-            last = new Node(item, null);
-        } else {
-            last = new Node(item, last);
-        }
-
+        first = new Node(item, first);
         N++;
     }
 
     @Override
     public T pop() {
-        T result = last.item;
-        last = last.prev;
+        T result = first.item;
+        first = first.next;
         N--;
         return result;
     }
 
     @Override
     public boolean isEmpty() {
-        return N == 0;
+        return first == null;
     }
 
     @Override

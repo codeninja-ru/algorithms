@@ -18,5 +18,9 @@ public class LinkedStackTest {
         assertEquals((int) stack.pop(), 2);
         assertEquals((int) stack.pop(), 1);
         assertEquals(stack.size(), 0);
+        assertTrue(stack.isEmpty());
+        stack.push(1);
+        assertEquals(stack.size(), 1);
+        assertEquals((int) stack.pop(), 1);
     }
 }
