@@ -1,0 +1,55 @@
+package org.algorithms.data;
+
+/**
+ * Created by vital on 26/04/2017.
+ */
+public class ArrayStack<T> implements Stack<T> {
+    final static int MAX = 255;
+    private Object[] store;
+    private int N = 0;
+
+    private void resize(int newSize) {
+        Object[] newStore = new Object[newSize];
+        System.arraycopy(store, 0, newStore, 0, N);
+
+        store = newStore;
+    }
+
+    public ArrayStack(int size) {
+        store = new Object[size];
+    }
+
+    public ArrayStack() {
+        this(MAX);
+    }
+
+    @Override
+    public void push(T item) {
+        if (store.length >= N) {
+            resize(store.length * 2);
+        }
+        store[N++] = item;
+    }
+
+    @Override
+    @SuppressWarnings("it's safe")
+    public T pop() {
+        T result = (T) store[--N];
+        store[N] = null;
+        if (N > MAX && N == store.length / 4) {
+            resize(N / 2);
+        }
+
+        return result;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return N == 0;
+    }
+
+    @Override
+    public int size() {
+        return N;
+    }
+}
