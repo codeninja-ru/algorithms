@@ -17,37 +17,50 @@ public class Evaluate {
 
         String[] split = expr.split(" ");
         for(String operand : split) {
-            if (operand.equals("(")) {
-                // do nothing
-            } else if (operand.equals(")")) {
-                String operation = operations.pop();
-                if (operation.equals("+")) {
-                    Double num2 = numbers.pop();
-                    Double num1 = numbers.pop();
+            switch (operand) {
+                case "(":
+                    // do nothing
+                    break;
+                case ")":
+                    String operation = operations.pop();
+                    switch (operation) {
+                        case "+": {
+                            Double num2 = numbers.pop();
+                            Double num1 = numbers.pop();
 
-                    numbers.push(num1 + num2);
-                } else if (operation.equals("-")) {
-                    Double num2 = numbers.pop();
-                    Double num1 = numbers.pop();
+                            numbers.push(num1 + num2);
+                            break;
+                        }
+                        case "-": {
+                            Double num2 = numbers.pop();
+                            Double num1 = numbers.pop();
 
-                    numbers.push(num1 - num2);
-                } else if (operation.equals("*")) {
-                    Double num2 = numbers.pop();
-                    Double num1 = numbers.pop();
+                            numbers.push(num1 - num2);
+                            break;
+                        }
+                        case "*": {
+                            Double num2 = numbers.pop();
+                            Double num1 = numbers.pop();
 
-                    numbers.push(num1 * num2);
-                } else if (operation.equals("sqrt")) {
-                    Double num1 = numbers.pop();
+                            numbers.push(num1 * num2);
+                            break;
+                        }
+                        case "sqrt": {
+                            Double num1 = numbers.pop();
 
-                    numbers.push(Math.sqrt(num1));
-                }
-            } else {
-                try {
-                    Double num = Double.parseDouble(operand);
-                    numbers.push(num);
-                } catch (NumberFormatException e) {
-                    operations.push(operand);
-                }
+                            numbers.push(Math.sqrt(num1));
+                            break;
+                        }
+                    }
+                    break;
+                default:
+                    try {
+                        Double num = Double.parseDouble(operand);
+                        numbers.push(num);
+                    } catch (NumberFormatException e) {
+                        operations.push(operand);
+                    }
+                    break;
             }
         }
 
