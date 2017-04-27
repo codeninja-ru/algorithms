@@ -5,7 +5,7 @@ import java.util.Stack;
 /**
  * Created by vital on 27/04/2017.
  */
-public class Evaluate {
+public class DijkstraEvaluate {
     /**
      * evaluates expression like ( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
      * @param expr
