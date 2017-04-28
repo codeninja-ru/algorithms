@@ -70,4 +70,43 @@ public class Parentheses {
 
         return stack.pop();
     }
+
+    /**
+     * 1.3.10 WriteafilterInfixToPostfixthatconvertsanarithmeticexpressionfromin-
+     fix to postfix.
+     * @param expr
+     * @return
+     */
+    public String infixToPostfix(String expr) {
+        Stack<String> stackNum = new LinkedStack<>();
+        Stack<String> stackOp = new LinkedStack<>();
+
+        for (String item : expr.split(" ")) {
+            switch (item) {
+                case "-":
+                case "+":
+                case "*":
+                    stackOp.push(item);
+                    break;
+                case ")":
+                    String exp2 = stackNum.pop();
+                    String op = stackOp.pop();
+                    String exp1 = stackNum.pop();
+
+                    stackNum.push(String.format("( %s %s %s )", exp1, exp2, op));
+                    break;
+                case "(":
+                    //do nothing
+                    break;
+                default:
+                    stackNum.push(item);
+                    break;
+            }
+        }
+
+        assert stackNum.size() == 1;
+        assert stackOp.isEmpty();
+
+        return stackNum.pop();
+    }
 }
