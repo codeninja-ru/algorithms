@@ -46,6 +46,13 @@ public class ResizingArrayQueueOfStrings implements Queue<String> {
         String result = store[firstN];
         store[firstN++] = null;
 
+        if (store.length > MAX && store.length == size() / 4) {
+            if (firstN > 0) {
+                compress();
+            }
+            resize(store.length / 2);
+        }
+
         return result;
     }
 
